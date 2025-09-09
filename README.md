@@ -15,8 +15,7 @@ This work is heavily based on the implementation of link functions in [GLM.jl](h
 ## Installation
 
 ```julia
-using Pkg
-add https://github.com/giovannitinervia9/LinkFunctions.jl
+pkg> add https://github.com/giovannitinervia9/LinkFunctions.jl.git
 ```
 
 ## Quick Start
