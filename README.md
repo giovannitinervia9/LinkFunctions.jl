@@ -1,7 +1,7 @@
 # LinkFunctions.jl
 [![Build Status](https://github.com/giovannitinervia9/LinkFunctions.jl/actions/workflows/CI.yml/badge.svg?branch=main)](https://github.com/giovannitinervia9/LinkFunctions.jl/actions/workflows/CI.yml?query=branch%3Amain)
 
-A Julia package providing a comprehensive collection of link functions for Generalized Linear Models (GLMs) and other statistical modeling contexts.
+A Julia module providing a comprehensive collection of link functions for Generalized Linear Models (GLMs) and other statistical modeling contexts.
 
 This work is heavily based on the implementation of link functions in [GLM.jl](https://github.com/JuliaStats/GLM.jl), but provides them as a standalone module for use in other packages implementing statistical models. The key enhancements over GLM.jl include explicit implementation of derivatives of both link functions and inverse link functions, and the introduction of link functions for parameters with arbitrarily constrained support: bounded intervals (a, b), upper-bounded intervals (-∞, b), and lower-bounded intervals (a, ∞).
 
