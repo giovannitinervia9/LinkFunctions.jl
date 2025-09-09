@@ -51,7 +51,6 @@ d²θ_dη² = theta2_eta2(logit_link, η)
 module LinkFunctions
 
 using LogExpFunctions: logistic, logit, xlogy
-import SpecialFunctions: erfc, erfcinv
 using Distributions: sqrt2, sqrt2π, Normal, cdf, invcdf
 
 # Export all public interface
