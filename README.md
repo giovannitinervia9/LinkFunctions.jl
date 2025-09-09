@@ -3,13 +3,20 @@
 
 A Julia package providing a comprehensive collection of link functions for Generalized Linear Models (GLMs) and other statistical modeling contexts.
 
-This work is heavily based on the implementation of link functions in [GLM.jl](https://github.com/JuliaStats/GLM.jl), but provides them as a standalone module for use in other packages implementing statistical models. The key enhancements over GLM.jl include explicit implementation of derivatives of both link functions and inverse link functions, and the introduction of link functions for parameters with arbitrarily constrained support: bounded intervals $(a, b)$, upper-bounded intervals $(-\infty, b)$, and lower-bounded intervals $(a, \infty)$.
+This work is heavily based on the implementation of link functions in [GLM.jl](https://github.com/JuliaStats/GLM.jl), but provides them as a standalone module for use in other packages implementing statistical models. The key enhancements over GLM.jl include explicit implementation of derivatives of both link functions and inverse link functions, and the introduction of link functions for parameters with arbitrarily constrained support: bounded intervals (a, b), upper-bounded intervals (-∞, b), and lower-bounded intervals (a, ∞).
+
+## Features
+
+- **Complete interface**: All link functions implement both forward and inverse transformations along with their first and second derivatives
+- **Bounded parameter support**: Link functions for parameters constrained to arbitrary intervals
+- **Vectorized operations**: All link functions broadcast naturally over arrays
+- **Type-stable implementations**: Optimized for performance in statistical computing
 
 ## Installation
 
 ```julia
 using Pkg
-add "LinkFunctions"
+Pkg.add("LinkFunctions")
 ```
 
 ## Quick Start
@@ -40,40 +47,40 @@ All link functions implement the following interface:
 
 ### Core Functions
 
-- `linkfun(link, θ)`: Forward link transformation $\eta = g(\theta)$
-- `linkinv(link, η)`: Inverse link transformation $\theta = g^{-1}(\eta)$
+- `linkfun(link, θ)`: Forward link transformation η = g(θ)
+- `linkinv(link, η)`: Inverse link transformation θ = g⁻¹(η)
 
 ### Derivatives
 
-- `theta_eta(link, η)`: First derivative $\partial \theta / \partial \eta$
-- `theta2_eta2(link, η)`: Second derivative $\partial^2 \theta / \partial^2 \eta^2$
-- `eta_theta(link, θ)`: First derivative $\partial \eta / \partial \theta$
-- `eta2_theta2(link, θ)`: Second derivative $\partial^2 \eta / \partial^2 \theta^2$
+- `theta_eta(link, η)`: First derivative ∂θ/∂η
+- `theta2_eta2(link, η)`: Second derivative ∂²θ/∂η²
+- `eta_theta(link, θ)`: First derivative ∂η/∂θ
+- `eta2_theta2(link, θ)`: Second derivative ∂²η/∂θ²
 
 ## Available Link Functions
 
 ### Standard Links (from GLM.jl)
 
-| Link Function | Parameter Domain | Transformation $\eta = g(\theta)$ |
+| Link Function | Parameter Domain | Transformation η = g(θ) |
 |:-------------|:-----------------|:-------------------------|
-| `IdentityLink()` | $\mathbb{R}$ | $\eta = \theta$ |
-| `LogitLink()` | $(0, 1)$ | $\eta = \log(\theta/(1-\theta))$ |
-| `ProbitLink()` | $(0, 1)$ | $\eta = \Phi^{-1}(\theta)$ |
-| `CloglogLink()` | $(0, 1)$ | $\eta = \log(-\log(1-\theta))$ |
-| `CauchitLink()` | $(0, 1)$ | $\eta = \tan(\pi(\theta-1/2))$ |
-| `LogLink()` | $(0, \infty)$ | $\eta = \log(\theta)$ |
-| `SqrtLink()` | $[0, \infty)$ | $\eta = \sqrt{\theta}$ |
-| `InverseLink()` | $(0, \infty)$ | $\eta = 1/\theta$ |
-| `InverseSquareLink()` | $(0, \infty)$ | $\eta = 1/\theta^2$ |
-| `PowerLink(p)` | $(0, \infty)$ | $\eta = \theta^p$ |
+| `IdentityLink()` | ℝ | η = θ |
+| `LogitLink()` | (0, 1) | η = log(θ/(1-θ)) |
+| `ProbitLink()` | (0, 1) | η = Φ⁻¹(θ) |
+| `CloglogLink()` | (0, 1) | η = log(-log(1-θ)) |
+| `CauchitLink()` | (0, 1) | η = tan(π(θ-1/2)) |
+| `LogLink()` | (0, ∞) | η = log(θ) |
+| `SqrtLink()` | [0, ∞) | η = √θ |
+| `InverseLink()` | (0, ∞) | η = 1/θ |
+| `InverseSquareLink()` | (0, ∞) | η = 1/θ² |
+| `PowerLink(p)` | (0, ∞) | η = θᵖ |
 
 ### Bounded Parameter Links (New in This Package)
 
-| Link Function | Parameter Domain | Transformation η = g(\theta) |
+| Link Function | Parameter Domain | Transformation η = g(θ) |
 |:-------------|:-----------------|:-------------------------|
-| `BoundedLink(a, b)` | $(a, b)$ | $\eta = \log((\theta-a)/(b-\theta))$ |
-| `LowerBoundedLink(a)` | $(a, ∞)$ | $\eta = \log(\theta-a)$ |
-| `UpperBoundedLink(b)` | $(-∞, b)$ | $\eta = \log(b-\theta)$ |
+| `BoundedLink(a, b)` | (a, b) | η = log((θ-a)/(b-θ)) |
+| `LowerBoundedLink(a)` | (a, ∞) | η = log(θ-a) |
+| `UpperBoundedLink(b)` | (-∞, b) | η = log(b-θ) |
 
 ## Examples
 
@@ -125,11 +132,12 @@ derivatives = theta_eta.(link, η_vec)
 
 ### Link Function Theory
 
-A link function $g(\cdot)$ connects a parameter $\theta$ of a response variable to a linear predictor $\eta$ through the relationship $\eta = g(\theta)$. The link function must be:
+A link function g(·) connects a parameter θ of a response variable to a linear predictor η through the relationship η = g(θ). The link function must be:
 
 1. **Monotonic**: Either strictly increasing or decreasing
 2. **Differentiable**: To enable gradient-based optimization  
 3. **Domain-appropriate**: Map from the parameter space to the real line
+
 
 ## Related Packages
 
