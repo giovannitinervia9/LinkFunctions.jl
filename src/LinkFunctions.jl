@@ -52,7 +52,7 @@ module LinkFunctions
 
 using LogExpFunctions: logistic, logit, xlogy
 import SpecialFunctions: erfc, erfcinv
-using Distributions: sqrt2, sqrt2π
+using Distributions: sqrt2, sqrt2π, Normal, cdf, invcdf
 
 # Export all public interface
 export Link,
