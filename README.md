@@ -5,13 +5,6 @@ A Julia module providing a comprehensive collection of link functions for Genera
 
 This work is heavily based on the implementation of link functions in [GLM.jl](https://github.com/JuliaStats/GLM.jl), but provides them as a standalone module for use in other packages implementing statistical models. The key enhancements over GLM.jl include explicit implementation of derivatives of both link functions and inverse link functions, and the introduction of link functions for parameters with arbitrarily constrained support: bounded intervals (a, b), upper-bounded intervals (-∞, b), and lower-bounded intervals (a, ∞).
 
-## Features
-
-- **Complete interface**: All link functions implement both forward and inverse transformations along with their first and second derivatives
-- **Bounded parameter support**: Link functions for parameters constrained to arbitrary intervals
-- **Vectorized operations**: All link functions broadcast naturally over arrays
-- **Type-stable implementations**: Optimized for performance in statistical computing
-
 ## Installation
 
 ```julia
